@@ -13,6 +13,7 @@
   <title>Ads Counter</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -22,25 +23,39 @@
 
     body {
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #253a31 0%, #101512 42%, #080a09 100%);
-      color: white;
       font-family: Arial, Helvetica, sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          #294438 0%,
+          #111a15 42%,
+          #070908 100%
+        );
+
+      color: #ffffff;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       overflow: hidden;
     }
 
     .app {
       width: 100%;
       max-width: 430px;
+
       min-height: 100vh;
-      padding: 35px 22px;
+
+      padding: 30px 20px;
+
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
+
+    /* HEADER */
 
     .header {
       text-align: center;
@@ -48,110 +63,177 @@
     }
 
     .logo {
-      width: 62px;
-      height: 62px;
+      width: 68px;
+      height: 68px;
+
       margin: auto;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
+
+      border-radius: 21px;
+
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 29px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+      align-items: center;
+
+      background: rgba(255,255,255,0.08);
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+
+      font-size: 30px;
     }
 
     .title {
-      margin-top: 16px;
+      margin-top: 15px;
+
       font-size: 28px;
       font-weight: 800;
+
       letter-spacing: -0.5px;
     }
 
     .subtitle {
       margin-top: 7px;
-      color: #9ba69f;
+
       font-size: 14px;
+
+      color: #9aa69f;
     }
 
+    /* CARD */
+
     .card {
-      background: rgba(255,255,255,0.075);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 27px;
       padding: 30px 22px;
+
+      border-radius: 28px;
+
       text-align: center;
+
+      background:
+        rgba(255,255,255,0.075);
+
+      border:
+        1px solid rgba(255,255,255,0.11);
+
       box-shadow:
-        0 25px 60px rgba(0,0,0,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.05);
-      backdrop-filter: blur(15px);
+        0 25px 60px rgba(0,0,0,0.35);
+
+      backdrop-filter: blur(18px);
     }
 
     .label {
-      color: #a9b2ad;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1.8px;
+      color: #a7b2ab;
+
+      font-size: 12px;
+
       font-weight: 700;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
     }
 
     .count {
       margin-top: 10px;
+
       font-size: 72px;
+
       line-height: 1;
+
       font-weight: 900;
-      letter-spacing: -3px;
+
+      letter-spacing: -4px;
     }
 
-    .count-small {
+    .count-info {
       margin-top: 9px;
-      color: #8d9992;
+
+      color: #7f8b84;
+
       font-size: 13px;
     }
 
-    .watch-btn {
+    /* BUTTON */
+
+    .watch-button {
       width: 100%;
+
       height: 61px;
-      margin-top: 24px;
-      border: 0;
+
+      margin-top: 25px;
+
+      border: none;
+
       border-radius: 18px;
-      background: linear-gradient(135deg, #79e3a1, #43b977);
-      color: #07120b;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7ce6a3,
+          #3fb875
+        );
+
+      color: #06120a;
+
       font-size: 16px;
+
       font-weight: 900;
-      letter-spacing: 0.7px;
-      box-shadow: 0 12px 30px rgba(67,185,119,0.22);
-      transition: transform .15s, opacity .15s;
+
+      letter-spacing: 0.8px;
+
+      box-shadow:
+        0 12px 30px rgba(63,184,117,0.22);
+
+      transition:
+        transform 0.15s,
+        opacity 0.15s;
     }
 
-    .watch-btn:active {
+    .watch-button:active {
       transform: scale(0.97);
     }
 
-    .watch-btn:disabled {
-      opacity: .55;
+    .watch-button:disabled {
+      opacity: 0.55;
     }
+
+    /* STATUS */
 
     .status {
       min-height: 20px;
-      margin-top: 15px;
-      text-align: center;
-      color: #8f9b94;
+
+      margin-top: 16px;
+
+      color: #8d9992;
+
       font-size: 13px;
+
+      line-height: 18px;
     }
 
     .footer {
-      text-align: center;
       margin-top: 22px;
-      color: #65716a;
+
+      text-align: center;
+
+      color: #626e67;
+
       font-size: 11px;
     }
+
   </style>
+
 </head>
 
 
 <body>
 
+
   <main class="app">
+
+
+    <!-- HEADER -->
 
     <div class="header">
 
@@ -170,41 +252,48 @@
     </div>
 
 
+    <!-- MAIN CARD -->
+
     <section class="card">
 
       <div class="label">
         Ads Watched
       </div>
 
+
       <div
-        class="count"
         id="adsCount"
+        class="count"
       >
         0
       </div>
 
-      <div class="count-small">
-        Total completed visits
+
+      <div class="count-info">
+        Total ad visits
       </div>
 
+
       <button
-        class="watch-btn"
-        id="watchBtn"
+        id="watchButton"
+        class="watch-button"
       >
         WATCH ADS
       </button>
 
+
       <div
-        class="status"
         id="status"
+        class="status"
       ></div>
 
     </section>
 
 
     <div class="footer">
-      Return to the app after visiting the ad
+      The ad will open in your browser
     </div>
+
 
   </main>
 
@@ -227,11 +316,11 @@
     ==================================================
     */
 
-    const countElement =
+    const adsCountElement =
       document.getElementById("adsCount");
 
     const watchButton =
-      document.getElementById("watchBtn");
+      document.getElementById("watchButton");
 
     const statusElement =
       document.getElementById("status");
@@ -243,128 +332,105 @@
     ==================================================
     */
 
-    let adsCount = Number(
-      localStorage.getItem("adsCount") || 0
-    );
+    let adsCount =
+      parseInt(
+        localStorage.getItem("adsCount") || "0",
+        10
+      );
 
-    countElement.textContent = adsCount;
+
+    adsCountElement.textContent =
+      adsCount;
 
 
     /*
     ==================================================
-      STATE
+      AD SESSION
     ==================================================
     */
 
     let waitingForReturn = false;
 
-    let openedTime = 0;
+    let openedAt = 0;
 
 
     /*
     ==================================================
-      OPEN SMART LINK
+      WATCH BUTTON
     ==================================================
     */
 
-    watchButton.addEventListener("click", function () {
+    watchButton.addEventListener(
+      "click",
+      function () {
 
-      if (waitingForReturn) {
-        return;
-      }
-
-      waitingForReturn = true;
-
-      openedTime = Date.now();
-
-      watchButton.disabled = true;
-
-      watchButton.textContent =
-        "OPENING ADS...";
-
-      statusElement.textContent =
-        "Your browser is opening...";
+        if (waitingForReturn) {
+          return;
+        }
 
 
-      /*
-      --------------------------------------------------
-      IMPORTANT
+        /*
+        ----------------------------------------------
+          Start session
+        ----------------------------------------------
+        */
 
-      _system tells Capacitor/Cordova style WebViews
-      to open the URL outside the WebView.
+        waitingForReturn = true;
 
-      --------------------------------------------------
-      */
+        openedAt = Date.now();
 
-      let opened = false;
 
-      try {
+        watchButton.disabled = true;
 
-        const newWindow =
-          window.open(
-            SMART_LINK,
-            "_system"
+        watchButton.textContent =
+          "OPENING BROWSER...";
+
+
+        statusElement.textContent =
+          "Opening the ad in your browser...";
+
+
+        /*
+        ----------------------------------------------
+          Send message to native Android
+        ----------------------------------------------
+        */
+
+        if (
+          window.Android &&
+          typeof window.Android.openAd === "function"
+        ) {
+
+          window.Android.openAd(
+            SMART_LINK
           );
 
-        if (newWindow) {
-          opened = true;
+        } else {
+
+          /*
+          --------------------------------------------
+            Fallback for browser / Live Server
+          --------------------------------------------
+          */
+
+          window.open(
+            SMART_LINK,
+            "_blank"
+          );
+
         }
-
-      } catch (e) {
-
-        console.log(
-          "External browser error:",
-          e
-        );
 
       }
-
-
-      /*
-      --------------------------------------------------
-      FALLBACK
-
-      If _system isn't supported, try normal browser
-      opening.
-      --------------------------------------------------
-      */
-
-      setTimeout(function () {
-
-        if (!opened) {
-
-          try {
-
-            window.open(
-              SMART_LINK,
-              "_blank"
-            );
-
-          } catch (e) {
-
-            window.location.href =
-              SMART_LINK;
-
-          }
-
-        }
-
-      }, 300);
-
-
-      statusElement.textContent =
-        "Return to the app after viewing the ad.";
-
-    });
+    );
 
 
     /*
     ==================================================
-      COUNT WHEN USER RETURNS
+      APP RETURN
     ==================================================
     */
 
-    function userReturnedToApp() {
+    function onAppReturned() {
 
       if (!waitingForReturn) {
         return;
@@ -372,13 +438,13 @@
 
 
       const awayTime =
-        Date.now() - openedTime;
+        Date.now() - openedAt;
 
 
       /*
-      --------------------------------------------------
-      Require at least 2 seconds outside the app.
-      --------------------------------------------------
+      ----------------------------------------------
+        Require minimum 2 seconds outside app
+      ----------------------------------------------
       */
 
       if (awayTime >= 2000) {
@@ -390,8 +456,10 @@
           String(adsCount)
         );
 
-        countElement.textContent =
+
+        adsCountElement.textContent =
           adsCount;
+
 
         statusElement.textContent =
           "✓ Ad visit counted +1";
@@ -399,12 +467,13 @@
       } else {
 
         statusElement.textContent =
-          "Please stay outside the app longer.";
+          "Please stay on the ad longer.";
 
       }
 
 
       waitingForReturn = false;
+
 
       watchButton.disabled = false;
 
@@ -428,13 +497,8 @@
           document.visibilityState === "visible"
         ) {
 
-          /*
-          Small delay so browser → app transition
-          completes properly.
-          */
-
           setTimeout(
-            userReturnedToApp,
+            onAppReturned,
             500
           );
 
@@ -446,28 +510,27 @@
 
     /*
     ==================================================
-      CAPACITOR APP RESUME SUPPORT
+      NATIVE ANDROID CALLBACK
     ==================================================
     */
 
-    document.addEventListener(
-      "resume",
+    window.onAdBrowserReturned =
       function () {
 
         setTimeout(
-          userReturnedToApp,
+          onAppReturned,
           500
         );
 
-      }
-    );
+      };
 
 
     /*
     ==================================================
-      RESET COUNT
-      Developer console only
+      RESET FUNCTION
     ==================================================
+
+      Developer console:
 
       resetAdsCount();
 
@@ -483,14 +546,13 @@
         "0"
       );
 
-      countElement.textContent = "0";
-
-      statusElement.textContent =
-        "Count reset.";
+      adsCountElement.textContent =
+        "0";
 
     }
 
   </script>
+
 
 </body>
 
