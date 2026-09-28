@@ -1,0 +1,328 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <title>Ads Counter</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f4f6fb;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    .count-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      margin-bottom: 22px;
+    }
+
+    .count-label {
+      font-size: 16px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    #adsCount {
+      font-size: 55px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1;
+    }
+
+    .watch-btn {
+      width: 100%;
+      height: 58px;
+      border: none;
+      border-radius: 16px;
+      background: #111;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .watch-btn:active {
+      transform: scale(0.97);
+    }
+
+    .watch-btn:disabled {
+      opacity: 0.6;
+    }
+
+    .status {
+      margin-top: 15px;
+      min-height: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="title">
+      Ads Counter
+    </div>
+
+    <div class="count-box">
+      <div class="count-label">
+        Ads Watched
+      </div>
+
+      <div id="adsCount">
+        0
+      </div>
+    </div>
+
+    <button id="watchBtn" class="watch-btn">
+      WATCH ADS
+    </button>
+
+    <div id="status" class="status"></div>
+
+  </div>
+
+
+  <script>
+
+    // ==========================================
+    // SMART LINK
+    // ==========================================
+
+    const SMART_LINK =
+      "https://www.profitableratecpmnetwork.com/a083yept13?key=d399c3748eeec8e565ec116687f5b3";
+
+
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
+
+    const adsCountElement = document.getElementById("adsCount");
+    const watchBtn = document.getElementById("watchBtn");
+    const statusElement = document.getElementById("status");
+
+
+    // ==========================================
+    // LOAD SAVED COUNT
+    // ==========================================
+
+    let adsCount = parseInt(
+      localStorage.getItem("adsCount") || "0",
+      10
+    );
+
+    adsCountElement.textContent = adsCount;
+
+
+    // ==========================================
+    // STATE
+    // ==========================================
+
+    let waitingForReturn = false;
+    let openedAt = 0;
+
+
+    // ==========================================
+    // WATCH ADS
+    // ==========================================
+
+    watchBtn.addEventListener("click", function () {
+
+      if (waitingForReturn) {
+        return;
+      }
+
+      waitingForReturn = true;
+      openedAt = Date.now();
+
+      watchBtn.disabled = true;
+      watchBtn.textContent = "AD OPENED...";
+
+      statusElement.textContent =
+        "Complete the ad and return to the app.";
+
+      /*
+        External browser open.
+
+        Android/Capacitor WebView normally opens
+        HTTPS links in the browser when using
+        window.open with _system.
+      */
+
+      try {
+
+        window.open(
+          SMART_LINK,
+          "_system"
+        );
+
+      } catch (error) {
+
+        // Fallback
+        window.location.href = SMART_LINK;
+
+      }
+
+    });
+
+
+    // ==========================================
+    // APP RESUME
+    // ==========================================
+
+    function handleAppResume() {
+
+      if (!waitingForReturn) {
+        return;
+      }
+
+      /*
+        Small delay so the app has completely
+        returned from the browser.
+      */
+
+      setTimeout(function () {
+
+        const timeAway =
+          Date.now() - openedAt;
+
+        /*
+          Minimum 2 seconds away from app.
+
+          This prevents an accidental immediate
+          resume from counting as an ad.
+        */
+
+        if (timeAway >= 2000) {
+
+          adsCount++;
+
+          localStorage.setItem(
+            "adsCount",
+            adsCount
+          );
+
+          adsCountElement.textContent =
+            adsCount;
+
+          statusElement.textContent =
+            "Ad completed! +1";
+
+        } else {
+
+          statusElement.textContent =
+            "Please stay on the ad longer.";
+
+        }
+
+        waitingForReturn = false;
+
+        watchBtn.disabled = false;
+        watchBtn.textContent = "WATCH ADS";
+
+      }, 500);
+
+    }
+
+
+    // ==========================================
+    // CAPACITOR APP STATE
+    // ==========================================
+
+    document.addEventListener(
+      "visibilitychange",
+      function () {
+
+        if (
+          document.visibilityState === "visible"
+        ) {
+          handleAppResume();
+        }
+
+      }
+    );
+
+
+    // Capacitor App plugin support
+    document.addEventListener(
+      "resume",
+      function () {
+        handleAppResume();
+      }
+    );
+
+
+    // ==========================================
+    // RESET FUNCTION
+    // ==========================================
+
+    // Developer console se manually reset:
+    // resetAdsCount()
+
+    function resetAdsCount() {
+
+      adsCount = 0;
+
+      localStorage.setItem(
+        "adsCount",
+        "0"
+      );
+
+      adsCountElement.textContent = "0";
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
+
+### Android Studio me
+
+Code paste karne ke baad:
+
+```bash
+npx cap sync android
+```
+
+phir Android Studio:
+
+```bash
+npx cap open android
+```
+
+**Important:** `window.open(..., "_system")` har Capacitor setup me external Chrome guarantee nahi karta. Agar tumhare current app me link WebView ke andar khul raha hai, to main `@capacitor/browser` wala version de sakta hoon jo **external browser explicitly open** karega.
