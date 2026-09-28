@@ -1,9 +1,14 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
 
   <title>Ads Counter</title>
 
@@ -17,59 +22,105 @@
 
     body {
       min-height: 100vh;
-      background: #f4f6fb;
-      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #253a31 0%, #101512 42%, #080a09 100%);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
-    .container {
+    .app {
       width: 100%;
-      max-width: 400px;
-      padding: 25px;
+      max-width: 430px;
+      min-height: 100vh;
+      padding: 35px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .header {
       text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      width: 62px;
+      height: 62px;
+      margin: auto;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 29px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.25);
     }
 
     .title {
+      margin-top: 16px;
       font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 25px;
-      color: #222;
-    }
-
-    .count-box {
-      background: white;
-      border-radius: 20px;
-      padding: 30px 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      margin-bottom: 22px;
-    }
-
-    .count-label {
-      font-size: 16px;
-      color: #777;
-      margin-bottom: 10px;
-    }
-
-    #adsCount {
-      font-size: 55px;
       font-weight: 800;
-      color: #111;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      margin-top: 7px;
+      color: #9ba69f;
+      font-size: 14px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.075);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 27px;
+      padding: 30px 22px;
+      text-align: center;
+      box-shadow:
+        0 25px 60px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      backdrop-filter: blur(15px);
+    }
+
+    .label {
+      color: #a9b2ad;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-weight: 700;
+    }
+
+    .count {
+      margin-top: 10px;
+      font-size: 72px;
       line-height: 1;
+      font-weight: 900;
+      letter-spacing: -3px;
+    }
+
+    .count-small {
+      margin-top: 9px;
+      color: #8d9992;
+      font-size: 13px;
     }
 
     .watch-btn {
       width: 100%;
-      height: 58px;
-      border: none;
-      border-radius: 16px;
-      background: #111;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.15s;
+      height: 61px;
+      margin-top: 24px;
+      border: 0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #79e3a1, #43b977);
+      color: #07120b;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      box-shadow: 0 12px 30px rgba(67,185,119,0.22);
+      transition: transform .15s, opacity .15s;
     }
 
     .watch-btn:active {
@@ -77,190 +128,297 @@
     }
 
     .watch-btn:disabled {
-      opacity: 0.6;
+      opacity: .55;
     }
 
     .status {
-      margin-top: 15px;
       min-height: 20px;
-      font-size: 14px;
-      color: #777;
+      margin-top: 15px;
+      text-align: center;
+      color: #8f9b94;
+      font-size: 13px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      color: #65716a;
+      font-size: 11px;
     }
   </style>
 </head>
 
+
 <body>
 
-  <div class="container">
+  <main class="app">
 
-    <div class="title">
-      Ads Counter
+    <div class="header">
+
+      <div class="logo">
+        ▶
+      </div>
+
+      <div class="title">
+        Ads Counter
+      </div>
+
+      <div class="subtitle">
+        Watch ads and increase your count
+      </div>
+
     </div>
 
-    <div class="count-box">
-      <div class="count-label">
+
+    <section class="card">
+
+      <div class="label">
         Ads Watched
       </div>
 
-      <div id="adsCount">
+      <div
+        class="count"
+        id="adsCount"
+      >
         0
       </div>
+
+      <div class="count-small">
+        Total completed visits
+      </div>
+
+      <button
+        class="watch-btn"
+        id="watchBtn"
+      >
+        WATCH ADS
+      </button>
+
+      <div
+        class="status"
+        id="status"
+      ></div>
+
+    </section>
+
+
+    <div class="footer">
+      Return to the app after visiting the ad
     </div>
 
-    <button id="watchBtn" class="watch-btn">
-      WATCH ADS
-    </button>
-
-    <div id="status" class="status"></div>
-
-  </div>
+  </main>
 
 
   <script>
 
-    // ==========================================
-    // SMART LINK
-    // ==========================================
+    /*
+    ==================================================
+      SMART LINK
+    ==================================================
+    */
 
     const SMART_LINK =
-      "https://www.profitableratecpmnetwork.com/a083yept13?key=d399c3748eeec8e565ec116687f5b3";
+      "https://www.profitableratecpmnetwork.com/a083yept13?key=d399c3748eeec8e565ec116687f5d3b5";
 
 
-    // ==========================================
-    // ELEMENTS
-    // ==========================================
+    /*
+    ==================================================
+      ELEMENTS
+    ==================================================
+    */
 
-    const adsCountElement = document.getElementById("adsCount");
-    const watchBtn = document.getElementById("watchBtn");
-    const statusElement = document.getElementById("status");
+    const countElement =
+      document.getElementById("adsCount");
+
+    const watchButton =
+      document.getElementById("watchBtn");
+
+    const statusElement =
+      document.getElementById("status");
 
 
-    // ==========================================
-    // LOAD SAVED COUNT
-    // ==========================================
+    /*
+    ==================================================
+      LOAD COUNT
+    ==================================================
+    */
 
-    let adsCount = parseInt(
-      localStorage.getItem("adsCount") || "0",
-      10
+    let adsCount = Number(
+      localStorage.getItem("adsCount") || 0
     );
 
-    adsCountElement.textContent = adsCount;
+    countElement.textContent = adsCount;
 
 
-    // ==========================================
-    // STATE
-    // ==========================================
+    /*
+    ==================================================
+      STATE
+    ==================================================
+    */
 
     let waitingForReturn = false;
-    let openedAt = 0;
+
+    let openedTime = 0;
 
 
-    // ==========================================
-    // WATCH ADS
-    // ==========================================
+    /*
+    ==================================================
+      OPEN SMART LINK
+    ==================================================
+    */
 
-    watchBtn.addEventListener("click", function () {
+    watchButton.addEventListener("click", function () {
 
       if (waitingForReturn) {
         return;
       }
 
       waitingForReturn = true;
-      openedAt = Date.now();
 
-      watchBtn.disabled = true;
-      watchBtn.textContent = "AD OPENED...";
+      openedTime = Date.now();
+
+      watchButton.disabled = true;
+
+      watchButton.textContent =
+        "OPENING ADS...";
 
       statusElement.textContent =
-        "Complete the ad and return to the app.";
+        "Your browser is opening...";
+
 
       /*
-        External browser open.
+      --------------------------------------------------
+      IMPORTANT
 
-        Android/Capacitor WebView normally opens
-        HTTPS links in the browser when using
-        window.open with _system.
+      _system tells Capacitor/Cordova style WebViews
+      to open the URL outside the WebView.
+
+      --------------------------------------------------
       */
+
+      let opened = false;
 
       try {
 
-        window.open(
-          SMART_LINK,
-          "_system"
+        const newWindow =
+          window.open(
+            SMART_LINK,
+            "_system"
+          );
+
+        if (newWindow) {
+          opened = true;
+        }
+
+      } catch (e) {
+
+        console.log(
+          "External browser error:",
+          e
         );
 
-      } catch (error) {
-
-        // Fallback
-        window.location.href = SMART_LINK;
-
       }
+
+
+      /*
+      --------------------------------------------------
+      FALLBACK
+
+      If _system isn't supported, try normal browser
+      opening.
+      --------------------------------------------------
+      */
+
+      setTimeout(function () {
+
+        if (!opened) {
+
+          try {
+
+            window.open(
+              SMART_LINK,
+              "_blank"
+            );
+
+          } catch (e) {
+
+            window.location.href =
+              SMART_LINK;
+
+          }
+
+        }
+
+      }, 300);
+
+
+      statusElement.textContent =
+        "Return to the app after viewing the ad.";
 
     });
 
 
-    // ==========================================
-    // APP RESUME
-    // ==========================================
+    /*
+    ==================================================
+      COUNT WHEN USER RETURNS
+    ==================================================
+    */
 
-    function handleAppResume() {
+    function userReturnedToApp() {
 
       if (!waitingForReturn) {
         return;
       }
 
+
+      const awayTime =
+        Date.now() - openedTime;
+
+
       /*
-        Small delay so the app has completely
-        returned from the browser.
+      --------------------------------------------------
+      Require at least 2 seconds outside the app.
+      --------------------------------------------------
       */
 
-      setTimeout(function () {
+      if (awayTime >= 2000) {
 
-        const timeAway =
-          Date.now() - openedAt;
+        adsCount++;
 
-        /*
-          Minimum 2 seconds away from app.
+        localStorage.setItem(
+          "adsCount",
+          String(adsCount)
+        );
 
-          This prevents an accidental immediate
-          resume from counting as an ad.
-        */
+        countElement.textContent =
+          adsCount;
 
-        if (timeAway >= 2000) {
+        statusElement.textContent =
+          "✓ Ad visit counted +1";
 
-          adsCount++;
+      } else {
 
-          localStorage.setItem(
-            "adsCount",
-            adsCount
-          );
+        statusElement.textContent =
+          "Please stay outside the app longer.";
 
-          adsCountElement.textContent =
-            adsCount;
+      }
 
-          statusElement.textContent =
-            "Ad completed! +1";
 
-        } else {
+      waitingForReturn = false;
 
-          statusElement.textContent =
-            "Please stay on the ad longer.";
+      watchButton.disabled = false;
 
-        }
-
-        waitingForReturn = false;
-
-        watchBtn.disabled = false;
-        watchBtn.textContent = "WATCH ADS";
-
-      }, 500);
+      watchButton.textContent =
+        "WATCH ADS";
 
     }
 
 
-    // ==========================================
-    // CAPACITOR APP STATE
-    // ==========================================
+    /*
+    ==================================================
+      VISIBILITY CHANGE
+    ==================================================
+    */
 
     document.addEventListener(
       "visibilitychange",
@@ -269,28 +427,52 @@
         if (
           document.visibilityState === "visible"
         ) {
-          handleAppResume();
+
+          /*
+          Small delay so browser → app transition
+          completes properly.
+          */
+
+          setTimeout(
+            userReturnedToApp,
+            500
+          );
+
         }
 
       }
     );
 
 
-    // Capacitor App plugin support
+    /*
+    ==================================================
+      CAPACITOR APP RESUME SUPPORT
+    ==================================================
+    */
+
     document.addEventListener(
       "resume",
       function () {
-        handleAppResume();
+
+        setTimeout(
+          userReturnedToApp,
+          500
+        );
+
       }
     );
 
 
-    // ==========================================
-    // RESET FUNCTION
-    // ==========================================
+    /*
+    ==================================================
+      RESET COUNT
+      Developer console only
+    ==================================================
 
-    // Developer console se manually reset:
-    // resetAdsCount()
+      resetAdsCount();
+
+    ==================================================
+    */
 
     function resetAdsCount() {
 
@@ -301,11 +483,16 @@
         "0"
       );
 
-      adsCountElement.textContent = "0";
+      countElement.textContent = "0";
+
+      statusElement.textContent =
+        "Count reset.";
 
     }
 
   </script>
 
 </body>
+
 </html>
+```
